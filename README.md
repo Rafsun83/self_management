@@ -4,3 +4,5 @@
 ``sudo apt install maven``
 ## Clean maven
 ``mvn clean``
+## Added swagger for API Documentation 
+``https://medium.com/javaguides/generate-rest-api-documentation-for-spring-boot-project-using-swagger-996e48fe0cea``
