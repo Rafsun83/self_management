@@ -13,6 +13,9 @@ public class Task {
     private Long id;
     private String title;
     private String description;
+    private String TaskType;
+    private Number status;
+    private String coverImage;
     private Date createTime;
     private Date updateTime;
 
@@ -53,5 +56,23 @@ public class Task {
     }
     public void setUpdateTime(Date updateTime){
         this.updateTime = updateTime;
+    }
+    public String getTaskType(){
+        return TaskType;
+    }
+    public void setTaskType(String taskType){
+        TaskType = taskType;
+    }
+    public String getCoverImage(){
+        return coverImage;
+    }
+    public void setCoverImage(String coverImage){
+        this.coverImage = coverImage;
+    }
+    public Number getStatus(){
+        return status;
+    }
+    public void setStatus(Number status){
+        this.status = status;
     }
 }

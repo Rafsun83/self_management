@@ -26,6 +26,7 @@ public class BookController {
         return bookService.getAllBook();
     }
 
+    @Operation(summary = "Create Book", description = "Create all books")
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book savedBook = bookService.createBook(book);
