@@ -2,11 +2,11 @@ package com.example.self_management.controller;
 
 import com.example.self_management.model.Blog;
 import com.example.self_management.repository.BlogRepository;
+import com.example.self_management.service.BlogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,13 +15,21 @@ import java.util.List;
 @Tag(name = "Blogs", description = "Get API for all blogs")
 public class BlogController {
 
-    private final BlogRepository blogRepository;
-    public BlogController(BlogRepository blogRepository){
-        this.blogRepository = blogRepository;
+    private final BlogService blogService;
+    public BlogController(BlogService blogService) {
+        this.blogService = blogService;
     }
     @Operation(summary = "Get all blogs", description = "Get all blogs from the system")
     @GetMapping
     public List<Blog> getAllBlogs(){
-        return blogRepository.findAll();
+        return blogService.getALlBlogs();
+    }
+
+    @Operation(summary = "Create blogs", description = "Blog creation API")
+    @PostMapping
+    public ResponseEntity<Blog> createBlog(@RequestBody Blog blog){
+        Blog saveBlog = blogService.createBlog(blog);
+        return ResponseEntity.ok(saveBlog);
+
     }
 }

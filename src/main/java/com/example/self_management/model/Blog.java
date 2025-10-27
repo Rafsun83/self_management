@@ -2,7 +2,8 @@ package com.example.self_management.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 @Entity
 @Table(name="blogs")
@@ -15,6 +16,9 @@ public class Blog {
     private String content;
     private String category ;
     private Date publishedDate;
+    private Date updateDate;
+    private String thumbnail;
+    private String authorName;
 
     public Blog() {}
 
@@ -48,6 +52,32 @@ public class Blog {
     }
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
+    }
+    public void setPublishedDate(Date publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+    public String getThumbnail() {
+        return thumbnail;
+    }
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
 }

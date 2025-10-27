@@ -4,6 +4,7 @@ import com.example.self_management.model.Blog;
 import com.example.self_management.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +18,12 @@ public class BlogService {
 
     public List<Blog> getALlBlogs(){
         return blogRepository.findAll();
+    }
+
+    public Blog createBlog(Blog blog){
+        blog.setPublishedDate(new Date());
+//        blog.setUpdateDate(new Date());
+        return blogRepository.save(blog);
     }
 
 }
