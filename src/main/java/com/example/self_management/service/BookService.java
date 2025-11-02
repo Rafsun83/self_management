@@ -1,7 +1,7 @@
 package com.example.self_management.service;
 
-import com.example.self_management.model.Book;
-import com.example.self_management.repository.BookRepository;
+import com.example.self_management.model.domain.Book;
+import com.example.self_management.persistence.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

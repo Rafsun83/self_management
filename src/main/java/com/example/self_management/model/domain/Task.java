@@ -1,4 +1,4 @@
-package com.example.self_management.model;
+package com.example.self_management.model.domain;
 
 import jakarta.persistence.*;
 

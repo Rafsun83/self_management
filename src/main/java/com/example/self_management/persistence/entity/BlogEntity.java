@@ -1,4 +1,4 @@
-package com.example.self_management.model;
+package com.example.self_management.persistence.entity;
 
 import jakarta.persistence.*;
 
@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="blogs")
-public class Blog {
+public class BlogEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class Blog {
     private String thumbnail;
     private String authorName;
 
-    public Blog() {}
+    public BlogEntity() {}
 
-    public Blog(String title, String content, String category){
+    public BlogEntity(String title, String content, String category){
         this.title = title;
         this.content = content;
         this.category = category;

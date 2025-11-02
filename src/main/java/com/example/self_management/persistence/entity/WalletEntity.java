@@ -1,4 +1,4 @@
-package com.example.self_management.model;
+package com.example.self_management.persistence.entity;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="wallet" )
-public class Wallet {
+public class WalletEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,9 +16,9 @@ public class Wallet {
     private Date createdTime;
     private Date updatedTime;
 
-    public Wallet() {}
+    public WalletEntity() {}
 
-    public Wallet(Long id, String type, Number amount, String category) {
+    public WalletEntity(Long id, String type, Number amount, String category) {
         this.id = id;
         this.type = type;
         this.amount = amount;

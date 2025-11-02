@@ -1,6 +1,6 @@
 package com.example.self_management.controller;
 
-import com.example.self_management.model.Task;
+import com.example.self_management.model.domain.Task;
 import com.example.self_management.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

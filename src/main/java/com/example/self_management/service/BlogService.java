@@ -1,7 +1,7 @@
 package com.example.self_management.service;
 
-import com.example.self_management.model.Blog;
-import com.example.self_management.repository.BlogRepository;
+import com.example.self_management.model.domain.Blog;
+import com.example.self_management.persistence.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

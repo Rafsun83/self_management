@@ -1,7 +1,7 @@
 package com.example.self_management.controller;
 
 
-import com.example.self_management.model.Book;
+import com.example.self_management.model.domain.Book;
 import com.example.self_management.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

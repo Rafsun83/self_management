@@ -1,7 +1,6 @@
 package com.example.self_management.controller;
 
-import com.example.self_management.model.Wallet;
-import com.example.self_management.repository.WalletRepository;
+import com.example.self_management.model.domain.Wallet;
 import com.example.self_management.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,8 +1,8 @@
 package com.example.self_management.service;
 
 
-import com.example.self_management.model.Wallet;
-import com.example.self_management.repository.WalletRepository;
+import com.example.self_management.model.domain.Wallet;
+import com.example.self_management.persistence.repository.WalletRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.example.self_management.model;
+package com.example.self_management.persistence.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "books")
-public class Book {
+public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,9 @@ public class Book {
     private String coverImage;
     private Date uploadDate;
 
-    public Book() {}
+    public BookEntity() {}
 
-    public Book(String title, String author) {
+    public BookEntity(String title, String author) {
         this.title = title;
         this.author = author;
     }
