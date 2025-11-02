@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/wallets")
-@Tag(name = "Get Wallet", description = "All wallet get here")
+@Tag(name = "Get wallet", description = "All wallet get here")
 public class WalletController {
 
     private final WalletService walletService;
@@ -27,7 +27,7 @@ public class WalletController {
         return walletService.getAllWallet();
     }
 
-    @Operation(summary = "Create Wallet", description = "Create your Wallet")
+    @Operation(summary = "Create wallet", description = "Create your wallet")
     @PostMapping
     public ResponseEntity<Wallet> addWallet( @RequestBody Wallet wallet){
         Wallet addWallet = walletService.addWallet(wallet);
