@@ -1,5 +1,4 @@
 package com.example.self_management.model.domain;
-import jakarta.persistence.*;
 
 import java.util.Date;
 

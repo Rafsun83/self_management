@@ -7,8 +7,6 @@ import com.example.self_management.persistence.entity.BookEntity;
 import com.example.self_management.persistence.repository.BookRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 import java.util.List;
 
 
