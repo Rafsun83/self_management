@@ -21,6 +21,7 @@ public class BlogController {
     public BlogController(BlogService blogService) {
         this.blogService = blogService;
     }
+
     @Operation(summary = "Get all blogs", description = "Get all blogs from the system")
     @GetMapping
     public List<Blog> getAllBlogs(@ParameterObject Pageable  pageable){
@@ -31,8 +32,5 @@ public class BlogController {
     @PostMapping
     public Long createBlog(@RequestBody CreateBlogRequest createBlogRequest){
         return blogService.createBlog(createBlogRequest);
-//        Blog saveBlog = blogService.createBlog(createBlogRequest);
-//        return ResponseEntity.ok(saveBlog);
-
     }
 }

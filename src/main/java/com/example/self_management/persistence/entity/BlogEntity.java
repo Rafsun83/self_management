@@ -22,10 +22,13 @@ public class BlogEntity {
 
     public BlogEntity() {}
 
-    public BlogEntity(String title, String content, String category){
+    public BlogEntity(String title, String content, String category, String authorName, String thumbnail) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.thumbnail = thumbnail;
+        this.authorName = authorName;
+
     }
 
     public Long getId(){

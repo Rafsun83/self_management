@@ -6,17 +6,20 @@ import com.example.self_management.persistence.entity.BlogEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class BlogMapper {
 
     public Blog entityToDomain(BlogEntity blogEntity){
-        Blog domain = new Blog();
-        BeanUtils.copyProperties(blogEntity,domain);
-        return domain;
+        Blog blog = new Blog();
+        BeanUtils.copyProperties(blogEntity,blog);
+        return blog;
     }
 
     public BlogEntity createBlogRequestToEntity(CreateBlogRequest createBlogRequest) {
         BlogEntity blogEntity = new BlogEntity();
+        blogEntity.setPublishedDate(new Date());
         BeanUtils.copyProperties(createBlogRequest, blogEntity);
         return blogEntity;
     };
