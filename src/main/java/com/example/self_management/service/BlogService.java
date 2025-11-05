@@ -1,29 +1,35 @@
 package com.example.self_management.service;
 
+import com.example.self_management.mapper.BlogMapper;
 import com.example.self_management.model.domain.Blog;
+import com.example.self_management.model.dto.CreateBlogRequest;
+import com.example.self_management.persistence.entity.BlogEntity;
 import com.example.self_management.persistence.repository.BlogRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 import java.util.List;
+
 
 @Service
 public class BlogService {
 
     private final  BlogRepository blogRepository;
+    private final BlogMapper  blogMapper;
 
-    public  BlogService(BlogRepository blogRepository){
+
+    public  BlogService(BlogRepository blogRepository, BlogMapper blogMapper){
         this.blogRepository =  blogRepository;
+        this.blogMapper = blogMapper;
     }
 
-    public List<Blog> getALlBlogs(){
-        return blogRepository.findAll();
+    public List<Blog> getALlBlogs(Pageable pageable){
+        List<BlogEntity> blogEntityList = blogRepository.findAll(pageable).getContent();
+        return blogEntityList.stream().map(blogMapper::entityToDomain).toList();
     }
 
-    public Blog createBlog(Blog blog){
-        blog.setPublishedDate(new Date());
-//        blog.setUpdateDate(new Date());
-        return blogRepository.save(blog);
+    public Long createBlog(CreateBlogRequest blogRequest){
+        var entityToSave = blogMapper.createBlogRequestToEntity(blogRequest);
+        var savedEntity = blogRepository.save(entityToSave);
+        return savedEntity.getId();
     }
-
 }

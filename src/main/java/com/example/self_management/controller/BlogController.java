@@ -1,9 +1,12 @@
 package com.example.self_management.controller;
 
 import com.example.self_management.model.domain.Blog;
+import com.example.self_management.model.dto.CreateBlogRequest;
 import com.example.self_management.service.BlogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +23,16 @@ public class BlogController {
     }
     @Operation(summary = "Get all blogs", description = "Get all blogs from the system")
     @GetMapping
-    public List<Blog> getAllBlogs(){
-        return blogService.getALlBlogs();
+    public List<Blog> getAllBlogs(@ParameterObject Pageable  pageable){
+        return blogService.getALlBlogs(pageable);
     }
 
     @Operation(summary = "Create blogs", description = "Blog creation API")
     @PostMapping
-    public ResponseEntity<Blog> createBlog(@RequestBody Blog blog){
-        Blog saveBlog = blogService.createBlog(blog);
-        return ResponseEntity.ok(saveBlog);
+    public Long createBlog(@RequestBody CreateBlogRequest createBlogRequest){
+        return blogService.createBlog(createBlogRequest);
+//        Blog saveBlog = blogService.createBlog(createBlogRequest);
+//        return ResponseEntity.ok(saveBlog);
 
     }
 }

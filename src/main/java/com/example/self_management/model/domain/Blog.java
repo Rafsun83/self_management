@@ -1,16 +1,9 @@
 package com.example.self_management.model.domain;
-
-import jakarta.persistence.*;
-
 import java.util.Date;
 
-
-@Entity
-@Table(name="blogs")
 public class Blog {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String title;
     private String content;
