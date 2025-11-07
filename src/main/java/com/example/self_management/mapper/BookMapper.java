@@ -2,6 +2,7 @@ package com.example.self_management.mapper;
 
 import com.example.self_management.model.domain.Book;
 import com.example.self_management.model.dto.CreateBookRequest;
+import com.example.self_management.model.dto.UpdateBookRequest;
 import com.example.self_management.persistence.entity.BookEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,13 @@ public class BookMapper {
         bookEntity.setUploadDate(new Date());
         BeanUtils.copyProperties(createBookRequest,bookEntity);
         return bookEntity;
+    }
+
+    public BookEntity updateBookRequestToEntity(UpdateBookRequest updateBookRequest, BookEntity bookEntity) {
+        bookEntity.setTitle(updateBookRequest.title());
+        bookEntity.setAbout(updateBookRequest.about());
+        bookEntity.setCoverImage(updateBookRequest.coverImage());
+        return bookEntity;
+
     }
 }

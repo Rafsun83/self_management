@@ -3,6 +3,7 @@ package com.example.self_management.service;
 import com.example.self_management.mapper.BookMapper;
 import com.example.self_management.model.domain.Book;
 import com.example.self_management.model.dto.CreateBookRequest;
+import com.example.self_management.model.dto.UpdateBookRequest;
 import com.example.self_management.persistence.entity.BookEntity;
 import com.example.self_management.persistence.repository.BookRepository;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,12 @@ public class BookService {
         var entityToSave = bookMapper.createBookRequestToEntity(createBookRequest);
         var saveBookEntity = bookRepository.save(entityToSave);
         return saveBookEntity.getId();
+    }
 
+    public void updateBook(Long id, UpdateBookRequest updateBookRequest){
+        var bookEntity = bookRepository.findById(id).get();
+        var updateBook = bookMapper.updateBookRequestToEntity(updateBookRequest, bookEntity);
+        bookRepository.save(updateBook);
     }
 
 }
