@@ -2,6 +2,7 @@ package com.example.self_management.mapper;
 
 import com.example.self_management.model.domain.Blog;
 import com.example.self_management.model.dto.CreateBlogRequest;
+import com.example.self_management.model.dto.UpdateBlogRequest;
 import com.example.self_management.persistence.entity.BlogEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -23,4 +24,11 @@ public class BlogMapper {
         BeanUtils.copyProperties(createBlogRequest, blogEntity);
         return blogEntity;
     };
+
+    public BlogEntity updateBlogRequestToEntity(UpdateBlogRequest updateBlogRequest,  BlogEntity blogEntity) {
+            blogEntity.setTitle(updateBlogRequest.title());
+            blogEntity.setContent(updateBlogRequest.content());
+            blogEntity.setThumbnail(updateBlogRequest.thumbnail());
+            return blogEntity;
+    }
 }
