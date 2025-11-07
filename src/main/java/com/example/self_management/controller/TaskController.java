@@ -1,10 +1,12 @@
 package com.example.self_management.controller;
 
 import com.example.self_management.model.domain.Task;
+import com.example.self_management.model.dto.CreateTaskRequest;
 import com.example.self_management.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,15 +22,14 @@ public class TaskController {
 
     @Operation(summary = "All Task", description = "Get all task for this system")
     @GetMapping
-    public List<Task> getAllTasks(){
-        return taskService.getAllTasks();
+    public List<Task> getAllTasks(@ParameterObject Pageable pageable) {
+        return taskService.getAllTasks(pageable);
     }
 
     @Operation(summary = "Create Task", description = "Create Task API")
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task){
-        Task saveTask = taskService.createTask(task);
-        return ResponseEntity.ok(saveTask);
+    public Long createTask(@RequestBody CreateTaskRequest  createTaskRequest) {
+        return  taskService.createTask(createTaskRequest);
     }
 
 }

@@ -1,15 +1,12 @@
 package com.example.self_management.model.domain;
 
-import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Entity
-@Table(name="tasks")
+
 public class Task {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String title;
     private String description;

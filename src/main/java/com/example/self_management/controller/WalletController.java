@@ -1,10 +1,12 @@
 package com.example.self_management.controller;
 
 import com.example.self_management.model.domain.Wallet;
+import com.example.self_management.model.dto.CreateWalletRequest;
 import com.example.self_management.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,14 +25,14 @@ public class WalletController {
 
     @Operation(summary = "Get All wallet data")
     @GetMapping
-    public List<Wallet> getAllWallet(){
-        return walletService.getAllWallet();
+    public List<Wallet> getAllWallet(@ParameterObject Pageable pageable) {
+        return walletService.getAllWallet(pageable);
     }
 
     @Operation(summary = "Create wallet", description = "Create your wallet")
     @PostMapping
-    public ResponseEntity<Wallet> addWallet( @RequestBody Wallet wallet){
-        Wallet addWallet = walletService.addWallet(wallet);
-        return ResponseEntity.ok(addWallet);
+    public Long addWallet(@RequestBody CreateWalletRequest  createWalletRequest) {
+        return walletService.addWallet(createWalletRequest);
+
     }
 }
