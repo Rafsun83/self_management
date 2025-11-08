@@ -2,6 +2,7 @@ package com.example.self_management.controller;
 
 import com.example.self_management.model.domain.Wallet;
 import com.example.self_management.model.dto.wallet.CreateWalletRequest;
+import com.example.self_management.model.dto.wallet.UpdateWalletRequest;
 import com.example.self_management.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,6 +34,11 @@ public class WalletController {
     @PostMapping
     public Long addWallet(@RequestBody CreateWalletRequest  createWalletRequest) {
         return walletService.addWallet(createWalletRequest);
+    }
 
+    @Operation(summary = "Update wallet", description = "Update wallet using this API")
+    @PutMapping("{id}")
+    public void updateWallet(@PathVariable Long id, @RequestBody UpdateWalletRequest updateWalletRequest) {
+        walletService.updateWallet(id, updateWalletRequest);
     }
 }

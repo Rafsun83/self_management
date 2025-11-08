@@ -4,6 +4,7 @@ package com.example.self_management.service;
 import com.example.self_management.mapper.WalletMapper;
 import com.example.self_management.model.domain.Wallet;
 import com.example.self_management.model.dto.wallet.CreateWalletRequest;
+import com.example.self_management.model.dto.wallet.UpdateWalletRequest;
 import com.example.self_management.persistence.entity.WalletEntity;
 import com.example.self_management.persistence.repository.WalletRepository;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,13 @@ public class WalletService {
         var saveWallet = walletMapper.createWalletRequestToEntity(createWalletRequest);
         var saveWalletEntity = walletRepository.save(saveWallet);
         return saveWalletEntity.getId();
+    }
+
+    public void updateWallet(Long id, UpdateWalletRequest updateWalletRequest) {
+        var walletEntity = walletRepository.findById(id).get();
+        var updateWallet = walletMapper.updateWalletRequestToEntity(updateWalletRequest, walletEntity);
+        walletRepository.save(updateWallet);
+
     }
 
 }

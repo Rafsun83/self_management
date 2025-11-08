@@ -3,6 +3,7 @@ package com.example.self_management.mapper;
 
 import com.example.self_management.model.domain.Wallet;
 import com.example.self_management.model.dto.wallet.CreateWalletRequest;
+import com.example.self_management.model.dto.wallet.UpdateWalletRequest;
 import com.example.self_management.persistence.entity.WalletEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,14 @@ public class WalletMapper {
         walletEntity.setCreatedTime(new Date());
         BeanUtils.copyProperties(createWalletRequest,walletEntity);
         return walletEntity;
+    }
+
+    public WalletEntity updateWalletRequestToEntity(UpdateWalletRequest updateWalletRequest, WalletEntity walletEntity) {
+        walletEntity.setAmount(updateWalletRequest.amount());
+        walletEntity.setCategory(updateWalletRequest.category());
+        walletEntity.setType(updateWalletRequest.type());
+        walletEntity.setUpdatedTime(new Date());
+        return walletEntity;
+
     }
 }
