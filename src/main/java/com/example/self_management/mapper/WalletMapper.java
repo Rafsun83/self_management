@@ -2,7 +2,7 @@ package com.example.self_management.mapper;
 
 
 import com.example.self_management.model.domain.Wallet;
-import com.example.self_management.model.dto.CreateWalletRequest;
+import com.example.self_management.model.dto.wallet.CreateWalletRequest;
 import com.example.self_management.persistence.entity.WalletEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;

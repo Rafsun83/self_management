@@ -2,8 +2,8 @@ package com.example.self_management.service;
 
 import com.example.self_management.mapper.BlogMapper;
 import com.example.self_management.model.domain.Blog;
-import com.example.self_management.model.dto.CreateBlogRequest;
-import com.example.self_management.model.dto.UpdateBlogRequest;
+import com.example.self_management.model.dto.blog.CreateBlogRequest;
+import com.example.self_management.model.dto.blog.UpdateBlogRequest;
 import com.example.self_management.persistence.entity.BlogEntity;
 import com.example.self_management.persistence.repository.BlogRepository;
 import org.springframework.data.domain.Pageable;

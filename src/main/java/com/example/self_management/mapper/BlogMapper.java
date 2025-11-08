@@ -1,8 +1,8 @@
 package com.example.self_management.mapper;
 
 import com.example.self_management.model.domain.Blog;
-import com.example.self_management.model.dto.CreateBlogRequest;
-import com.example.self_management.model.dto.UpdateBlogRequest;
+import com.example.self_management.model.dto.blog.CreateBlogRequest;
+import com.example.self_management.model.dto.blog.UpdateBlogRequest;
 import com.example.self_management.persistence.entity.BlogEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;

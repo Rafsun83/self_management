@@ -2,7 +2,7 @@ package com.example.self_management.service;
 
 import com.example.self_management.mapper.TaskMapper;
 import com.example.self_management.model.domain.Task;
-import com.example.self_management.model.dto.CreateTaskRequest;
+import com.example.self_management.model.dto.task.CreateTaskRequest;
 import com.example.self_management.persistence.entity.TaskEntity;
 import com.example.self_management.persistence.repository.TaskRepository;
 import org.springframework.data.domain.Pageable;

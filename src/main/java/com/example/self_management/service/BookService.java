@@ -2,8 +2,8 @@ package com.example.self_management.service;
 
 import com.example.self_management.mapper.BookMapper;
 import com.example.self_management.model.domain.Book;
-import com.example.self_management.model.dto.CreateBookRequest;
-import com.example.self_management.model.dto.UpdateBookRequest;
+import com.example.self_management.model.dto.book.CreateBookRequest;
+import com.example.self_management.model.dto.book.UpdateBookRequest;
 import com.example.self_management.persistence.entity.BookEntity;
 import com.example.self_management.persistence.repository.BookRepository;
 import org.springframework.data.domain.Pageable;

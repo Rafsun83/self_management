@@ -1,7 +1,7 @@
 package com.example.self_management.controller;
 
 import com.example.self_management.model.domain.Wallet;
-import com.example.self_management.model.dto.CreateWalletRequest;
+import com.example.self_management.model.dto.wallet.CreateWalletRequest;
 import com.example.self_management.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

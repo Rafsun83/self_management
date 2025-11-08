@@ -2,7 +2,7 @@ package com.example.self_management.mapper;
 
 
 import com.example.self_management.model.domain.Task;
-import com.example.self_management.model.dto.CreateTaskRequest;
+import com.example.self_management.model.dto.task.CreateTaskRequest;
 import com.example.self_management.persistence.entity.TaskEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;

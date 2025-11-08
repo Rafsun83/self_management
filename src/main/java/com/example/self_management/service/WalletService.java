@@ -3,14 +3,12 @@ package com.example.self_management.service;
 
 import com.example.self_management.mapper.WalletMapper;
 import com.example.self_management.model.domain.Wallet;
-import com.example.self_management.model.dto.CreateWalletRequest;
+import com.example.self_management.model.dto.wallet.CreateWalletRequest;
 import com.example.self_management.persistence.entity.WalletEntity;
 import com.example.self_management.persistence.repository.WalletRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service

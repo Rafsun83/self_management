@@ -1,4 +1,4 @@
-package com.example.self_management.model.dto;
+package com.example.self_management.model.dto.blog;
 
 
 
