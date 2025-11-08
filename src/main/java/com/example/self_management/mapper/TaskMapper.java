@@ -30,6 +30,7 @@ public class TaskMapper {
         taskEntity.setTitle(updateTaskRequest.title());
         taskEntity.setDescription(updateTaskRequest.description());
         taskEntity.setCoverImage(updateTaskRequest.coverImage());
+        taskEntity.setUpdateTime(new Date());
         return taskEntity;
     }
 

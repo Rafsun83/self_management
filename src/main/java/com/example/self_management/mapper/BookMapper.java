@@ -29,6 +29,7 @@ public class BookMapper {
         bookEntity.setTitle(updateBookRequest.title());
         bookEntity.setAbout(updateBookRequest.about());
         bookEntity.setCoverImage(updateBookRequest.coverImage());
+        bookEntity.setUploadDate(new Date());
         return bookEntity;
 
     }

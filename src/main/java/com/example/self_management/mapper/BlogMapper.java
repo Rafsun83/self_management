@@ -29,6 +29,7 @@ public class BlogMapper {
             blogEntity.setTitle(updateBlogRequest.title());
             blogEntity.setContent(updateBlogRequest.content());
             blogEntity.setThumbnail(updateBlogRequest.thumbnail());
+            blogEntity.setUpdateDate(new Date());
             return blogEntity;
     }
 }
