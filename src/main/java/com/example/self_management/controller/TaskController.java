@@ -27,6 +27,12 @@ public class TaskController {
         return taskService.getAllTasks(pageable);
     }
 
+    @Operation(summary = "Get task by Id", description = "Get task by Id through the API")
+    @GetMapping("{id}")
+    public Task getTaskById(@PathVariable Long id) {
+        return taskService.getTaskById(id);
+    }
+
     @Operation(summary = "Create Task", description = "Create Task API")
     @PostMapping
     public Long createTask(@RequestBody CreateTaskRequest  createTaskRequest) {

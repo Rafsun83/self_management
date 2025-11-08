@@ -28,6 +28,12 @@ public class BlogController {
         return blogService.getALlBlogs(pageable);
     }
 
+    @Operation(summary = "Get blog through the id")
+    @GetMapping("{id}")
+    public Blog getBlogById(@PathVariable Long id){
+        return blogService.getBlogById(id);
+    }
+
     @Operation(summary = "Create blogs", description = "Blog creation API")
     @PostMapping
     public Long createBlog(@RequestBody CreateBlogRequest createBlogRequest){

@@ -28,6 +28,11 @@ public class WalletService {
         return walletEntityList.stream().map(walletMapper :: entityToWalletDomain).toList();
     }
 
+    public Wallet getWalletById(Long id) {
+        WalletEntity walletEntity = walletRepository.findById(id).orElse(null);
+        return walletMapper.entityToWalletDomain(walletEntity);
+    }
+
     public Long addWallet(CreateWalletRequest createWalletRequest) {
         var saveWallet = walletMapper.createWalletRequestToEntity(createWalletRequest);
         var saveWalletEntity = walletRepository.save(saveWallet);

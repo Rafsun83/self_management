@@ -28,6 +28,11 @@ public class BlogService {
         return blogEntityList.stream().map(blogMapper::entityToDomain).toList();
     }
 
+    public Blog getBlogById(Long id){
+        BlogEntity blogEntity = blogRepository.findById(id).orElse(null);
+        return blogMapper.entityToDomain(blogEntity);
+    }
+
     public Long createBlog(CreateBlogRequest blogRequest){
         var entityToSave = blogMapper.createBlogRequestToEntity(blogRequest);
         var savedEntity = blogRepository.save(entityToSave);

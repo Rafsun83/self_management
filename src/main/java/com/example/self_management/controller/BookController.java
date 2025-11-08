@@ -29,6 +29,12 @@ public class BookController {
         return bookService.getAllBook(pageable);
     }
 
+    @Operation(summary = "Get book by Id", description = "Get book by Id through the API")
+    @GetMapping("{id}")
+    public Book getBookById(@PathVariable Long id){
+        return bookService.getBookById(id);
+    }
+
     @Operation(summary = "Create Book", description = "Create all books")
     @PostMapping
     public Long createBook(@RequestBody CreateBookRequest createBookRequest) {

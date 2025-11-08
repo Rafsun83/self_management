@@ -24,7 +24,11 @@ public class TaskService {
     public List<Task> getAllTasks(Pageable pageable) {
         List<TaskEntity> getTaskList = taskRepository.findAll(pageable).getContent();
         return getTaskList.stream().map(taskMapper:: entityToTaskDomain).toList();
+    }
 
+    public Task getTaskById(Long id) {
+        TaskEntity taskEntity = taskRepository.findById(id).orElse(null);
+        return taskMapper.entityToTaskDomain(taskEntity);
     }
 
     public Long createTask(CreateTaskRequest createTaskRequest) {

@@ -26,6 +26,11 @@ public class BookService {
         return bookEntityList.stream().map(bookMapper:: entityToBookDomain).toList();
     }
 
+    public Book getBookById(Long id){
+        BookEntity bookEntity = bookRepository.findById(id).orElse(null);
+        return bookMapper.entityToBookDomain(bookEntity);
+    }
+
     public Long createBook(CreateBookRequest createBookRequest){
         var entityToSave = bookMapper.createBookRequestToEntity(createBookRequest);
         var saveBookEntity = bookRepository.save(entityToSave);

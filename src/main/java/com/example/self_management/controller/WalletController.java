@@ -30,6 +30,12 @@ public class WalletController {
         return walletService.getAllWallet(pageable);
     }
 
+    @Operation(summary = "Get wallet by Id", description = "Get wallet by Id through the API")
+    @GetMapping("{id}")
+    public Wallet getWalletById(@PathVariable Long id) {
+        return walletService.getWalletById(id);
+    }
+
     @Operation(summary = "Create wallet", description = "Create your wallet")
     @PostMapping
     public Long addWallet(@RequestBody CreateWalletRequest  createWalletRequest) {
