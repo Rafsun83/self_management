@@ -45,4 +45,11 @@ public class BlogController {
     public void updateBlog(@PathVariable Long id, @RequestBody UpdateBlogRequest updateBlogRequest){
         blogService.updateBlog(id, updateBlogRequest);
     }
+
+
+    @Operation(summary = "Delete blog", description = "Delete blog through the API")
+    @DeleteMapping("{id}")
+    public void deleteBlog(@PathVariable Long id){
+        blogService.deleteBlog(id);
+    }
 }

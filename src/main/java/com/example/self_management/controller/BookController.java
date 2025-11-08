@@ -46,4 +46,11 @@ public class BookController {
     public void updateBook(@PathVariable Long id, @RequestBody UpdateBookRequest updateBookRequest) {
         bookService.updateBook(id, updateBookRequest);
     }
+
+
+    @Operation(summary = "Delete book", description = "Delete book through the API")
+    @DeleteMapping("{id}")
+    public void deleteBook(@PathVariable Long id){
+        bookService.deleteBook(id);
+    }
 }

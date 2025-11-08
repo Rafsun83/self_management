@@ -45,4 +45,8 @@ public class BlogService {
         blogRepository.save(updateBlog);
     }
 
+    public void deleteBlog(Long id){
+        blogRepository.deleteById(id);
+    }
+
 }

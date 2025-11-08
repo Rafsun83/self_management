@@ -43,7 +43,10 @@ public class WalletService {
         var walletEntity = walletRepository.findById(id).get();
         var updateWallet = walletMapper.updateWalletRequestToEntity(updateWalletRequest, walletEntity);
         walletRepository.save(updateWallet);
+    }
 
+    public void deleteWallet(Long id) {
+        walletRepository.deleteById(id);
     }
 
 }

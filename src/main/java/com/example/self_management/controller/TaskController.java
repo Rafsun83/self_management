@@ -45,4 +45,11 @@ public class TaskController {
         taskService.updateTask(id, updateTaskRequest);
     }
 
+
+    @Operation(summary = "Delete Task", description = "Delete task through the API")
+    @DeleteMapping("{id}")
+    public void deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
+    }
+
 }

@@ -47,4 +47,10 @@ public class WalletController {
     public void updateWallet(@PathVariable Long id, @RequestBody UpdateWalletRequest updateWalletRequest) {
         walletService.updateWallet(id, updateWalletRequest);
     }
+
+    @Operation(summary="Delete Task", description = "Delete task through the API")
+    @DeleteMapping("{id}")
+    public void deleteTask (@PathVariable Long id) {
+        walletService.deleteWallet(id);
+    }
 }
