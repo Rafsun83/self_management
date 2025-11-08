@@ -2,6 +2,7 @@ package com.example.self_management.controller;
 
 import com.example.self_management.model.domain.Task;
 import com.example.self_management.model.dto.task.CreateTaskRequest;
+import com.example.self_management.model.dto.task.UpdateTaskRequest;
 import com.example.self_management.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,6 +31,12 @@ public class TaskController {
     @PostMapping
     public Long createTask(@RequestBody CreateTaskRequest  createTaskRequest) {
         return  taskService.createTask(createTaskRequest);
+    }
+
+    @Operation(summary = "Update task", description = "Update task by this")
+    @PutMapping("{id}")
+    public void updateTask(@PathVariable Long id, @RequestBody UpdateTaskRequest updateTaskRequest) {
+        taskService.updateTask(id, updateTaskRequest);
     }
 
 }
