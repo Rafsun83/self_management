@@ -2,16 +2,21 @@ package com.example.self_management.model.domain;
 
 public class User {
     private Long id;
-    private String email;
     private String name;
+    private String email;
     private String location;
+    private String password;
+    private String username;
 
     public User(){}
 
-    public User(String email, String name, String location){
+    public User( String email, String name, String location, String password, String username){
         this.email = email;
         this.name = name;
         this.location = location;
+        this.username = username;
+        this.password = password;
+
     }
 
     public Long getId(){
@@ -19,13 +24,6 @@ public class User {
     }
     public void setId(Long id){
         this.id = id;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-    public void setEmail(String email){
-        this.email = email;
     }
 
     public String getName(){
@@ -39,6 +37,27 @@ public class User {
         return location;
     }
     public void setLocation(String location){
-        this.location = location;
+        this.location=location;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
     }
 }

@@ -12,13 +12,17 @@ public class UserEntity {
     private String name;
     private String email;
     private String location;
+    private String password;
+    private String username;
 
     public UserEntity(){}
 
-    public UserEntity( String email, String name, String location){
+    public UserEntity( String email, String name, String location, String password, String username){
         this.email = email;
         this.name = name;
         this.location = location;
+        this.username = username;
+        this.password = password;
 
     }
 
@@ -48,6 +52,20 @@ public class UserEntity {
     }
     public void setEmail(String email){
         this.email = email;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
     }
 
 }
