@@ -10,4 +10,42 @@
 ``http://localhost:8080/swagger-ui/index.html#/``
 
 # (Spring security)
-``Added spring security dependency and set password in application properties file instead of defaults user and password``
+``Basic AUTH: Added spring security dependency and set password in application properties file instead of defaults user and password``
+## 🔐 JWT Authentication Structure
+```text
+src/main/java
+└── com/example/selfmanagement
+    ├── config
+    │   └── SecurityConfig.java       # Security filtering & filter chain setup
+    ├── security
+    │   └── jwt
+    │       ├── JwtAuthFilter.java    # Request interceptor for token validation
+    │       └── JwtService.java       # Token generation & parsing logic
+    ├── controller
+    │   └── AuthController.java       # Authentication endpoints (Login/Sign-up)
+    └── dto
+        ├── LoginRequest.java         # DTO for incoming credentials
+        └── JwtResponse.java          # DTO for outgoing JWT tokens
+```
+
+### 📁 `config`
+- **SecurityConfig.java**  
+  Configures Spring Security, enables JWT-based authentication, disables session management, and registers the JWT filter.
+
+### 📁 `security/jwt`
+- **JwtService.java**  
+  Responsible for generating, parsing, and validating JWT tokens.
+
+- **JwtAuthFilter.java**  
+  Intercepts incoming requests, extracts JWT from the `Authorization` header, validates it, and sets authentication in the security context.
+
+### 📁 `controller`
+- **AuthController.java**  
+  Exposes authentication endpoints (e.g., login) and issues JWT tokens after successful authentication.
+
+### 📁 `dto`
+- **LoginRequest.java**  
+  Data Transfer Object for receiving login credentials.
+
+- **JwtResponse.java**  
+  Data Transfer Object for returning the generated JWT token to the client.
