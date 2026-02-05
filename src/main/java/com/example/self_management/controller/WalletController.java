@@ -26,8 +26,8 @@ public class WalletController {
 
     @Operation(summary = "Get All wallet data")
     @GetMapping
-    public List<Wallet> getAllWallet(@ParameterObject Pageable pageable) {
-        return walletService.getAllWallet(pageable);
+    public List<Wallet> getAllWallet() {
+        return walletService.getAllWallet();
     }
 
     @Operation(summary = "Get wallet by Id", description = "Get wallet by Id through the API")

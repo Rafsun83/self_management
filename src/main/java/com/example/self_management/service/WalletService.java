@@ -20,13 +20,16 @@ public class WalletService {
     private final WalletRepository walletRepository;
     private final WalletMapper  walletMapper;
 
+
     public WalletService(WalletRepository walletRepository, WalletMapper walletMapper) {
         this.walletRepository = walletRepository;
         this.walletMapper = walletMapper;
     }
 
-    public List<Wallet> getAllWallet(Pageable pageable) {
-        List<WalletEntity>  walletEntityList = walletRepository.findAll(pageable).getContent();
+    public List<Wallet> getAllWallet() {
+        //Removed pageable from getWallet params because I used custom query
+        Long userId = getLoggedInUserId();
+        List<WalletEntity>  walletEntityList = walletRepository.findByUserId(userId);
         return walletEntityList.stream().map(walletMapper :: entityToWalletDomain).toList();
     }
 
