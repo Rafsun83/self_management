@@ -3,6 +3,7 @@
 ## Maven install in your application
 ``sudo apt install maven``
 ## Clean maven or build
+
 ``mvn clean``
 ## Added swagger for API Documentation 
 ``https://medium.com/javaguides/generate-rest-api-documentation-for-spring-boot-project-using-swagger-996e48fe0cea``
@@ -49,3 +50,7 @@ src/main/java
 
 - **JwtResponse.java**  
   Data Transfer Object for returning the generated JWT token to the client.
+
+### 📁 `JWT Generate note:`
+- **JWT-**
+  Pass userId and username for generate jwt token. Implemented here. 
