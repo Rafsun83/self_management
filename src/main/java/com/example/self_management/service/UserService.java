@@ -2,6 +2,7 @@ package com.example.self_management.service;
 
 import com.example.self_management.mapper.UserMapper;
 import com.example.self_management.model.domain.User;
+import com.example.self_management.model.dto.user.CreateUserRequest;
 import com.example.self_management.persistence.entity.UserEntity;
 import com.example.self_management.persistence.repository.UserRepository;
 import org.springframework.data.domain.Pageable;
@@ -23,5 +24,11 @@ public class UserService {
     public List<User> getAllUsers(Pageable pageable){
         List<UserEntity> userEntityList = userRepository.findAll(pageable).getContent();
         return userEntityList.stream().map(userMapper::entityToDomain).toList();
+    }
+
+    public Long createUser(CreateUserRequest createUserRequest){
+        var entityToSave = userMapper.createUserRequestToEntity(createUserRequest);
+        var saveUser = userRepository.save(entityToSave);
+        return saveUser.getId();
     }
 }

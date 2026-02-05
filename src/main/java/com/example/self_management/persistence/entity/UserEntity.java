@@ -2,6 +2,8 @@ package com.example.self_management.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -14,15 +16,17 @@ public class UserEntity {
     private String location;
     private String password;
     private String username;
+    private Date createdAt;
 
     public UserEntity(){}
 
-    public UserEntity( String email, String name, String location, String password, String username){
+    public UserEntity( String email, String name, String location, String password, String username, Date createdAt){
         this.email = email;
         this.name = name;
         this.location = location;
         this.username = username;
         this.password = password;
+        this.createdAt = createdAt;
 
     }
 
@@ -68,4 +72,10 @@ public class UserEntity {
         this.password = password;
     }
 
+    public Date getCreateAt(){
+        return createdAt;
+    }
+    public void setCreateAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

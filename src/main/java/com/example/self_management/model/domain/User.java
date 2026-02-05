@@ -1,5 +1,7 @@
 package com.example.self_management.model.domain;
 
+import java.util.Date;
+
 public class User {
     private Long id;
     private String name;
@@ -7,15 +9,17 @@ public class User {
     private String location;
     private String password;
     private String username;
+    private Date createdAt;
 
     public User(){}
 
-    public User( String email, String name, String location, String password, String username){
+    public User( String email, String name, String location, String password, String username, Date createdAt){
         this.email = email;
         this.name = name;
         this.location = location;
         this.username = username;
         this.password = password;
+        this.createdAt = createdAt;
 
     }
 
@@ -59,5 +63,12 @@ public class User {
     }
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public Date getCreatedAt(){
+        return createdAt;
+    }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
