@@ -19,9 +19,10 @@ public class WalletMapper {
         return wallet;
     }
 
-    public WalletEntity createWalletRequestToEntity(CreateWalletRequest createWalletRequest) {
+    public WalletEntity createWalletRequestToEntity(CreateWalletRequest createWalletRequest, Long userId) {
         WalletEntity walletEntity = new WalletEntity();
         walletEntity.setCreatedTime(new Date());
+        walletEntity.setUserId(userId);
         BeanUtils.copyProperties(createWalletRequest,walletEntity);
         return walletEntity;
     }

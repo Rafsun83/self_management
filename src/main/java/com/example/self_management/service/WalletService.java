@@ -8,6 +8,8 @@ import com.example.self_management.model.dto.wallet.UpdateWalletRequest;
 import com.example.self_management.persistence.entity.WalletEntity;
 import com.example.self_management.persistence.repository.WalletRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +36,8 @@ public class WalletService {
     }
 
     public Long addWallet(CreateWalletRequest createWalletRequest) {
-        var saveWallet = walletMapper.createWalletRequestToEntity(createWalletRequest);
+        Long userId = getLoggedInUserId();
+        var saveWallet = walletMapper.createWalletRequestToEntity(createWalletRequest, userId);
         var saveWalletEntity = walletRepository.save(saveWallet);
         return saveWalletEntity.getId();
     }
@@ -47,6 +50,11 @@ public class WalletService {
 
     public void deleteWallet(Long id) {
         walletRepository.deleteById(id);
+    }
+
+    private Long getLoggedInUserId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return (Long) auth.getPrincipal();
     }
 
 }
