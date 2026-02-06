@@ -55,10 +55,5 @@ public class AuthController {
         return userService.createUser(createUserRequest);
     }
 
-    @GetMapping("/users")
-    public List<User> getAllUsers(@ParameterObject Pageable pageable){
-        return userService.getAllUsers(pageable);
-
-    }
 
 }
