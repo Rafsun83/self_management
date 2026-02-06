@@ -54,3 +54,9 @@ src/main/java
 ### 📁 `JWT Generate note:`
 - **JWT-**
   Pass userId and username for generate jwt token. Implemented here. 
+
+#### `Why Utility Classes Should Be final`
+- **Are not meant to be inherited** 
+- **Contain static methods only** 
+- **Represent helpers, not domain objects** 
+- **No other class can extend this class** 
