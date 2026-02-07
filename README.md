@@ -60,3 +60,81 @@ src/main/java
 - **Contain static methods only** 
 - **Represent helpers, not domain objects** 
 - **No other class can extend this class** 
+
+#### `JWT Logout & Token Invalidation (simple + practical)`
+
+JWT is stateless, so you cannot “delete” a token on the server like session logout.
+You must invalidate it logically.
+
+### 📁 `There are 3 real-world ways to implement logout`
+✅ OPTION 1: Short-Lived Access Token (RECOMMENDED SIMPLE WAY)
+
+How it works:
+* Access token expires quickly (e.g. 15–30 min)
+* Logout = client deletes token
+
+Steps:
+1. User clicks logout
+2. Frontend deletes token (localStorage / cookie)
+3. Done
+
+Pros:
+* Very simple
+* No DB needed
+
+Cons:
+* Token stays valid until it expires
+👉 Best for small apps / MVP
+
+✅ OPTION 2: Refresh Token + Logout (INDUSTRY STANDARD)
+
+How it works:
+
+* Access token (short-lived)
+* Refresh token (stored in DB)
+* Logout = revoke refresh token
+
+Flow:
+
+1. Login → issue access + refresh token
+2. Store refresh token in DB (hashed)
+3. Logout API:
+* Delete refresh token from DB
+
+1. Client deletes access token
+
+Pros:
+
+* Secure
+* Proper logout
+* Scales well
+
+Cons
+* Slightly more complex
+
+👉 BEST PRACTICE for production
+
+✅ OPTION 3: JWT Blacklist (Not Recommended at Scale)
+
+How it works:
+
+* Store JWT (or jti) in DB/Redis
+* On every request → check blacklist
+
+Pros:
+
+* Immediate logout
+
+Cons:
+
+* DB/Redis lookup every request
+* Loses JWT stateless benefit
+
+👉 Use only if absolutely needed
+
+### 🧠 `Important Notes`
+
+* Never store access token in DB
+* Always hash refresh tokens
+* Use HttpOnly cookies if possible
+* Rotate refresh tokens
