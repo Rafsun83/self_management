@@ -22,7 +22,7 @@ public class UserMapper {
 
     public UserEntity createUserRequestToEntity(CreateUserRequest createUserRequest){
         UserEntity userEntity = new UserEntity();
-        userEntity.setCreateAt(new Date());
+        userEntity.setCreatedAt(new Date());
         BeanUtils.copyProperties(createUserRequest, userEntity);
         return userEntity;
     }

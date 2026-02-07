@@ -72,10 +72,10 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Date getCreateAt(){
+    public Date getCreatedAt(){
         return createdAt;
     }
-    public void setCreateAt(Date createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 }
