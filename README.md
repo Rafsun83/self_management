@@ -138,3 +138,12 @@ Cons:
 * Always hash refresh tokens
 * Use HttpOnly cookies if possible
 * Rotate refresh tokens
+
+Note: `jwt token is a acces token`
+
+When people talk about:
+
+* Access Token
+* Refresh Token
+
+They are talking about two different purposes, not two JWTs by default.
