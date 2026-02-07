@@ -12,6 +12,7 @@ public class JwtService {
 
     private static final String SECRET_KEY = String.valueOf(Keys.secretKeyFor(SignatureAlgorithm.HS256));
 
+    //Here, I generated a jwt token through a secret key. As well pass username and userId for generate token. set validate time in this token.
     public String generateToken(String username, Long userId){
         return Jwts.builder()
                 .setSubject(username) //username pass

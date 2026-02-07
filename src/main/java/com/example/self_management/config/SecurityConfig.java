@@ -23,7 +23,7 @@ public class SecurityConfig {
     public SecurityConfig(JwtAuthFilter jwtAuthFilter){
         this.jwtAuthFilter = jwtAuthFilter;
     }
-
+    // Security Configuration: Here first of all I disable csrf from browser. Then Authorization request has been public under the /auth url. And this was firstly used when applied basic authentication.
 
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws  Exception{

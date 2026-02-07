@@ -20,7 +20,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     public JwtAuthFilter(JwtService jwtService){
         this.jwtService = jwtService;
     }
-
+    // In here: I filtered jwt token from header. After filter, I checked is valid or not through the jtw service class. If jwt token is valid then pass inside securityContextHolder.
     @Override
     protected void doFilterInternal(HttpServletRequest request,
     HttpServletResponse response,
@@ -33,7 +33,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
-//        String username = jwtService.extractUsername(token);
+        // String username = jwtService.extractUsername(token);
         Long userId = jwtService.extractUserId(token);
 
         if (jwtService.isTokenValid(token)){
