@@ -3,7 +3,9 @@ package com.example.self_management.config;
 import com.example.self_management.security.jwt.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +26,12 @@ public class SecurityConfig {
         this.jwtAuthFilter = jwtAuthFilter;
     }
     // Security Configuration: Here first of all I disable csrf from browser. Then Authorization request has been public under the /auth url. And this was firstly used when applied basic authentication.
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
+        return config.getAuthenticationManager();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws  Exception{

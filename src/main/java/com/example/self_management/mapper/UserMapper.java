@@ -7,12 +7,17 @@ import com.example.self_management.model.dto.user.CreateUserRequest;
 import com.example.self_management.persistence.entity.TaskEntity;
 import com.example.self_management.persistence.entity.UserEntity;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
 public class UserMapper {
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     public User entityToDomain(UserEntity userEntity){
         User user = new User();
@@ -23,6 +28,7 @@ public class UserMapper {
     public UserEntity createUserRequestToEntity(CreateUserRequest createUserRequest){
         UserEntity userEntity = new UserEntity();
         userEntity.setCreatedAt(new Date());
+//        userEntity.setPassword(passwordEncoder.encode(createUserRequest.password()));
         BeanUtils.copyProperties(createUserRequest, userEntity);
         return userEntity;
     }

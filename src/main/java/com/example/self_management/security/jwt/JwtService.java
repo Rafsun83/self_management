@@ -1,5 +1,6 @@
 package com.example.self_management.security.jwt;
 
+import com.example.self_management.persistence.entity.UserEntity;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -13,10 +14,10 @@ public class JwtService {
     private static final String SECRET_KEY = String.valueOf(Keys.secretKeyFor(SignatureAlgorithm.HS256));
 
     //Here, I generated a jwt token through a secret key. As well pass username and userId for generate token. set validate time in this token.
-    public String generateToken(String username, Long userId){
+    public String generateToken(UserEntity userEntity) {
         return Jwts.builder()
-                .setSubject(username) //username pass
-                .claim("userId", userId)
+                .setSubject(userEntity.getUsername()) //username pass
+                .claim("userId", userEntity.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS256)
