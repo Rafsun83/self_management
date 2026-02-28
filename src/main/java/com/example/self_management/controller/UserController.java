@@ -2,12 +2,11 @@ package com.example.self_management.controller;
 
 
 import com.example.self_management.model.domain.User;
+import com.example.self_management.model.dto.user.CreateUserRequest;
 import com.example.self_management.service.UserService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +28,9 @@ public class UserController {
     public List<User> getAllUsers(@ParameterObject Pageable pageable){
         return userService.getAllUsers(pageable);
     }
+
+//    @PostMapping("/registration")
+//    public Long registration(@RequestBody CreateUserRequest createUserRequest){
+//        return userService.createUser(createUserRequest);
+//    }
 }

@@ -147,3 +147,35 @@ When people talk about:
 * Refresh Token
 
 They are talking about two different purposes, not two JWTs by default.
+
+### Recommended Structure (Professional)
+```text
+com.example.authdemo
+│
+├── auth
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   ├── dto
+│   └── security
+│
+├── course
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   └── dto
+│
+├── book
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   └── dto
+│
+├── common
+│   ├── exception
+│   ├── config
+│   └── util
+```

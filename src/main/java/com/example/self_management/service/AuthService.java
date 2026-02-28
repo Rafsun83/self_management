@@ -1,0 +1,64 @@
+package com.example.self_management.service;
+
+import com.example.self_management.model.domain.User;
+import com.example.self_management.model.dto.auth.JwtResponse;
+import com.example.self_management.model.dto.auth.LoginRequest;
+import com.example.self_management.persistence.entity.RefreshTokenEntity;
+import com.example.self_management.persistence.entity.UserEntity;
+import com.example.self_management.persistence.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class AuthService {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private RefreshTokenService refreshTokenService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public void register(User requestUser) {
+        UserEntity user = new UserEntity();
+        user.setName(requestUser.getName());
+        user.setEmail(requestUser.getEmail());
+        user.setCreatedAt(requestUser.getCreatedAt());
+        user.setLocation(requestUser.getLocation());
+        user.setUsername(requestUser.getUsername());
+        user.setPassword(passwordEncoder.encode(requestUser.getPassword()));
+        if (userRepository.findByUsername(requestUser.getUsername()).isPresent()) {
+            throw new RuntimeException("Username already exists");
+        }
+        userRepository.save(user);
+    }
+
+    public JwtResponse login(LoginRequest loginRequest) {
+        UserEntity user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+        String accessToken = jwtService.generateAccessToken(user.getId());
+        RefreshTokenEntity refreshTokenEntity = refreshTokenService.createRefreshToken(user);
+        return new JwtResponse(accessToken, refreshTokenEntity.getRefreshToken());
+    }
+
+    public JwtResponse refreshToken(String token) {
+        RefreshTokenEntity refreshToken = refreshTokenService.verifyRefreshToken(token);
+        String accessToken = jwtService.generateAccessToken(refreshToken.getUserEntity().getId());
+        return new JwtResponse(accessToken, token);
+    }
+
+    public void logout(String refreshToken) {
+        RefreshTokenEntity token = refreshTokenService.verifyRefreshToken(refreshToken);
+        refreshTokenService.deleteByUser(token.getUserEntity());
+    }
+
+
+}

@@ -7,6 +7,8 @@ import com.example.self_management.model.dto.user.CreateUserRequest;
 import com.example.self_management.persistence.entity.TaskEntity;
 import com.example.self_management.persistence.entity.UserEntity;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
