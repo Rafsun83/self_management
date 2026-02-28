@@ -3,6 +3,7 @@ package com.example.self_management.service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -12,9 +13,11 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private String SECRET_KEY = "rO0ABXNyACJqYXZhLnV0aWwuUmFuZG9tQWNjZXNzU2VjcmV0S2V5MTIzNDU2Nzg5MDEyMzQ1Njc4OTA=";
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
     private Key getSignKey() {
-        byte[] keyBytes = Base64.getDecoder().decode(SECRET_KEY);
+        byte[] keyBytes = Base64.getDecoder().decode(jwtSecret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -29,7 +32,7 @@ public class JwtService {
 
     public String extractUserId(String token) {
         return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
