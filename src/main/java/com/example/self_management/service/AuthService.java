@@ -33,6 +33,9 @@ public class AuthService {
         user.setLocation(requestUser.getLocation());
         user.setUsername(requestUser.getUsername());
         user.setPassword(passwordEncoder.encode(requestUser.getPassword()));
+        if (userRepository.findByUsername(requestUser.getUsername()).isPresent()) {
+            throw new RuntimeException("Username already exists");
+        }
         userRepository.save(user);
     }
 
