@@ -16,9 +16,6 @@ import java.util.Date;
 @Component
 public class UserMapper {
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
     public User entityToDomain(UserEntity userEntity){
         User user = new User();
         BeanUtils.copyProperties(userEntity, user);
@@ -28,7 +25,6 @@ public class UserMapper {
     public UserEntity createUserRequestToEntity(CreateUserRequest createUserRequest){
         UserEntity userEntity = new UserEntity();
         userEntity.setCreatedAt(new Date());
-//        userEntity.setPassword(passwordEncoder.encode(createUserRequest.password()));
         BeanUtils.copyProperties(createUserRequest, userEntity);
         return userEntity;
     }

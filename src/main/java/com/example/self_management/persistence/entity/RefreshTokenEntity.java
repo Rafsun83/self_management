@@ -1,10 +1,7 @@
 package com.example.self_management.persistence.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "refresh_tokens")
@@ -15,21 +12,21 @@ public class RefreshTokenEntity {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String refreshToken;
+    private String token;
 
-    @OneToOne
+    private LocalDateTime expiryDate;
+
+    @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
-    @JsonIgnore
     private UserEntity userEntity;
 
-    private Instant expiresAt;
 
     public RefreshTokenEntity() {}
 
-    public RefreshTokenEntity(String refreshToken, UserEntity userEntity, Instant expiresAt) {
-        this.refreshToken = refreshToken;
+    public RefreshTokenEntity(String token, UserEntity userEntity, LocalDateTime expiryDate) {
+        this.token = token;
         this.userEntity = userEntity;
-        this.expiresAt = expiresAt;
+        this.expiryDate = expiryDate;
     }
 
     public Long getId() {
@@ -39,10 +36,10 @@ public class RefreshTokenEntity {
         this.id = id;
     }
     public String getRefreshToken() {
-        return refreshToken;
+        return token;
     }
     public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+        this.token = refreshToken;
     }
     public UserEntity getUserEntity() {
         return userEntity;
@@ -50,10 +47,10 @@ public class RefreshTokenEntity {
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
-    public Instant getExpiresAt() {
-        return expiresAt;
+    public LocalDateTime getExpiresAt() {
+        return expiryDate;
     }
-    public void setExpiresAt(Instant expiresAt) {
-        this.expiresAt = expiresAt;
+    public void setExpiresAt(LocalDateTime expiresAt) {
+        this.expiryDate = expiresAt;
     }
 }

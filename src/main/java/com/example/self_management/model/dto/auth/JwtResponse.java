@@ -2,7 +2,6 @@ package com.example.self_management.model.dto.auth;
 
 public class JwtResponse {
     private String accessToken;
-    private String tokenType = "Bearer";
     private String refreshToken;
 
     public JwtResponse(String accessToken, String refreshToken) {
@@ -14,7 +13,14 @@ public class JwtResponse {
         return accessToken;
     }
 
+    public void setAccessToken(String accessToken){
+        this.accessToken = accessToken;
+    }
+
     public String getRefreshToken(){
         return refreshToken;
+    }
+    public void setRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
     }
 }

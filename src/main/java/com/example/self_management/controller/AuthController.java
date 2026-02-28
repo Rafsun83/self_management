@@ -1,43 +1,28 @@
 package com.example.self_management.controller;
 
-import com.example.self_management.model.domain.RefreshToken;
 import com.example.self_management.model.domain.User;
 import com.example.self_management.model.dto.auth.JwtResponse;
 import com.example.self_management.model.dto.auth.LoginRequest;
-import com.example.self_management.model.dto.user.CreateUserRequest;
-import com.example.self_management.persistence.entity.UserEntity;
-import com.example.self_management.persistence.repository.UserRepository;
-import com.example.self_management.security.jwt.AuthService;
-import com.example.self_management.security.jwt.JwtService;
-import com.example.self_management.service.UserService;
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
+import com.example.self_management.model.dto.auth.RefreshTokenRequest;
+import com.example.self_management.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthService authService;
-    private final JwtService jwtService;
-    private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
-    private final UserRepository userRepository;
+    @Autowired
+    private AuthService authService;
 
-
-    public AuthController (AuthService authService, JwtService jwtService, PasswordEncoder passwordEncoder, UserService userService, UserRepository userRepository){
-        this.authService = authService;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-        this.userRepository = userRepository;
-
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User request) {
+        authService.register(request);
+        return ResponseEntity.ok("User registered");
     }
 
     @PostMapping("/login")
@@ -46,34 +31,13 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<JwtResponse> refresh(@RequestBody RefreshToken request) {
+    public ResponseEntity<JwtResponse> refresh(@RequestBody RefreshTokenRequest request) {
         return ResponseEntity.ok(authService.refreshToken(request.getRefreshToken()));
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestBody RefreshToken request) {
+    public ResponseEntity<?> logout(@RequestBody RefreshTokenRequest request) {
         authService.logout(request.getRefreshToken());
-        return ResponseEntity.ok("Logged out successfully");
+        return ResponseEntity.ok("Logged out");
     }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginRequest request ){
-//        UserEntity userEntity = userRepository.findByUsername(request.getUsername()).orElse(null);
-//
-//
-//
-//        if (userEntity == null || !passwordEncoder.matches(request.getPassword(), new BCryptPasswordEncoder().encode(userEntity.getPassword()) )){
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//
-//        String token = jwtService.generateToken(userEntity.getUsername(), userEntity.getId());
-//        return ResponseEntity.ok(new JwtResponse(token));
-//    }
-
-    @PostMapping("/registration")
-    public Long registration(@RequestBody CreateUserRequest createUserRequest){
-        return userService.createUser(createUserRequest);
-    }
-
-
 }
