@@ -21,7 +21,24 @@ public class GlobalExceptionHandler  {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<Object>> handleNotFound(ResourceNotFoundException ex) {
         ApiResponse<Object> response =
-                new ApiResponse<>(false, ex.getMessage(), null);
+                new ApiResponse<>(false, ex.getMessage(), null, HttpStatus.NOT_FOUND.value());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    // Handle all unexpected errors
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<Object>> handleInternalServerError(Exception ex) {
+        // (Optional) log the real error in console
+        ex.printStackTrace();
+        ApiResponse<Object> response =
+                new ApiResponse<>(
+                        false,
+                        "Something went wrong. Please try again later.",
+                        null,
+                        HttpStatus.INTERNAL_SERVER_ERROR.value()
+                );
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(response);
     }
 }

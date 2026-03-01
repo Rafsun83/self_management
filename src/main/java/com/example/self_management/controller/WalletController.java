@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class WalletController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<Wallet>>>  getAllWallet() {
         List<Wallet> wallet = walletService.getAllWallet();
-        ApiResponse<List<Wallet>> response = new ApiResponse<>(true, "Wallet fetched successfully!", wallet);
+        ApiResponse<List<Wallet>> response = new ApiResponse<>(true, "Wallet fetched successfully!", wallet, HttpStatus.OK.value());
         return ResponseEntity.ok(response);
     }
 
@@ -38,7 +39,7 @@ public class WalletController {
     @GetMapping("{id}")
     public ResponseEntity<ApiResponse<Wallet>> getWalletById(@PathVariable Long id) {
         Wallet wallet = walletService.getWalletById(id);
-        ApiResponse<Wallet> response = new ApiResponse<>(true, "Wallet fetched successfully!", wallet);
+        ApiResponse<Wallet> response = new ApiResponse<>(true, "Wallet fetched successfully!", wallet, HttpStatus.OK.value());
         return ResponseEntity.ok(response);
     }
 
