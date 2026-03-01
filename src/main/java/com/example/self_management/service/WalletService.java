@@ -9,9 +9,6 @@ import com.example.self_management.model.dto.wallet.UpdateWalletRequest;
 import com.example.self_management.persistence.entity.WalletEntity;
 import com.example.self_management.persistence.repository.WalletRepository;
 import com.example.self_management.utils.SecurityUtil;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,28 +36,30 @@ public class WalletService {
     }
 
     public Wallet getWalletById(Long id) {
-        WalletEntity walletEntity = walletRepository.findById(id).orElse(null);
-        if (walletEntity == null) {
-            throw new ResourceNotFoundException("No wallet found");
-        }
+        Long userId = SecurityUtil.getLoggedUserId();
+        WalletEntity walletEntity = walletRepository.findByIdAndUserId(id, userId).orElseThrow(() -> new ResourceNotFoundException("No wallet found for this user"));
         return walletMapper.entityToWalletDomain(walletEntity);
     }
 
-    public Long addWallet(CreateWalletRequest createWalletRequest) {
+    public Wallet addWallet(CreateWalletRequest createWalletRequest) {
         Long userId = SecurityUtil.getLoggedUserId();
         var saveWallet = walletMapper.createWalletRequestToEntity(createWalletRequest, userId);
         var saveWalletEntity = walletRepository.save(saveWallet);
-        return saveWalletEntity.getId();
+        return walletMapper.entityToWalletDomain(saveWalletEntity);
     }
 
     public void updateWallet(Long id, UpdateWalletRequest updateWalletRequest) {
-        var walletEntity = walletRepository.findById(id).get();
+        Long userId = SecurityUtil.getLoggedUserId();
+        var walletEntity = walletRepository.findByIdAndUserId(id, userId).get();
         var updateWallet = walletMapper.updateWalletRequestToEntity(updateWalletRequest, walletEntity);
         walletRepository.save(updateWallet);
     }
 
     public void deleteWallet(Long id) {
-        walletRepository.deleteById(id);
+        Long userId = SecurityUtil.getLoggedUserId();
+        WalletEntity wallet = walletRepository.findByIdAndUserId(id, userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Wallet not found for this user"));
+        walletRepository.delete(wallet);
     }
 
 }
