@@ -179,3 +179,10 @@ com.example.authdemo
 │   ├── config
 │   └── util
 ```
+
+### Automatic Reload After Changes
+1. Added DevTools Dependency
+2. Go to IDE Settings → Build, Execution, Deployment → Compiler. and Check Build project automatically.
+3. Go to advance setting bottom of the settings and check allow auto-make to start
+4. Then reload or newly start IDE
+5. Change any method and test.
