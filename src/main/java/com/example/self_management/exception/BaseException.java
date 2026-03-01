@@ -1,6 +1,5 @@
 package com.example.self_management.exception;
 
-import ch.qos.logback.core.spi.ErrorCodes;
 import org.springframework.http.HttpStatus;
 
 public class BaseException extends RuntimeException {
