@@ -1,6 +1,7 @@
 package com.example.self_management.service;
 
 
+import com.example.self_management.exception.ResourceNotFoundException;
 import com.example.self_management.mapper.WalletMapper;
 import com.example.self_management.model.domain.Wallet;
 import com.example.self_management.model.dto.wallet.CreateWalletRequest;
@@ -31,11 +32,17 @@ public class WalletService {
         //Removed pageable from getWallet params because I used custom query
         Long userId = SecurityUtil.getLoggedUserId();
         List<WalletEntity>  walletEntityList = walletRepository.findByUserId(userId);
+        if (walletEntityList.isEmpty()) {
+            throw new ResourceNotFoundException("No wallet found");
+        }
         return walletEntityList.stream().map(walletMapper :: entityToWalletDomain).toList();
     }
 
     public Wallet getWalletById(Long id) {
         WalletEntity walletEntity = walletRepository.findById(id).orElse(null);
+        if (walletEntity == null) {
+            throw new ResourceNotFoundException("No wallet found");
+        }
         return walletMapper.entityToWalletDomain(walletEntity);
     }
 

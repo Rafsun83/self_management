@@ -1,5 +1,6 @@
 package com.example.self_management.service;
 
+import com.example.self_management.exception.UserAlreadyExistsException;
 import com.example.self_management.model.domain.User;
 import com.example.self_management.model.dto.auth.JwtResponse;
 import com.example.self_management.model.dto.auth.LoginRequest;
@@ -27,15 +28,16 @@ public class AuthService {
 
     public void register(User requestUser) {
         UserEntity user = new UserEntity();
+        boolean exist = userRepository.findByUsername(requestUser.getUsername()).isPresent();
+        if (exist) {
+            throw new UserAlreadyExistsException("Username '" + requestUser.getUsername() + "' already exists!");
+        }
         user.setName(requestUser.getName());
         user.setEmail(requestUser.getEmail());
         user.setCreatedAt(requestUser.getCreatedAt());
         user.setLocation(requestUser.getLocation());
         user.setUsername(requestUser.getUsername());
         user.setPassword(passwordEncoder.encode(requestUser.getPassword()));
-        if (userRepository.findByUsername(requestUser.getUsername()).isPresent()) {
-            throw new RuntimeException("Username already exists");
-        }
         userRepository.save(user);
     }
 
