@@ -63,12 +63,12 @@ public class RefreshTokenService {
         RefreshTokenEntity user = refreshTokenRepository
                 .findByToken(token)
                 .orElseThrow();
-        var sessions =
-                refreshTokenRepository.findByDeviceIdAndIsActiveTrue(user.getDeviceId());
-
-        for (RefreshTokenEntity session : sessions) {
-            session.setIsActive(false);
-        }
-        refreshTokenRepository.saveAll(sessions);
+//        var sessions =
+//                refreshTokenRepository.findByDeviceIdAndIsActiveTrue(user.getDeviceId());
+//        for (RefreshTokenEntity session : sessions) {
+//            session.setIsActive(false);
+//        }
+        refreshTokenRepository.deactivateAllActiveTokens(user.getUserEntity().getId());
+//        refreshTokenRepository.saveAll(sessions);
     }
 }
