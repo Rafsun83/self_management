@@ -1,6 +1,5 @@
 package com.example.self_management.service;
 
-
 import com.example.self_management.persistence.entity.RefreshTokenEntity;
 import com.example.self_management.persistence.entity.UserEntity;
 import com.example.self_management.persistence.repository.RefreshTokenRepository;
@@ -17,11 +16,25 @@ public class RefreshTokenService {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
-    public RefreshTokenEntity createRefreshToken(UserEntity userEntity) {
+    public RefreshTokenEntity createRefreshToken(UserEntity userEntity, String userAgent, String ipAddress, String deviceId) {
+
+        //2️⃣ Device limit (max 3)
+        int activeSessions =
+                refreshTokenRepository.countByDeviceIdAndIsActiveTrue(deviceId);
+        if (activeSessions >= 3) {
+            throw new RuntimeException("Maximum device limit reached");
+        }
+
         RefreshTokenEntity refreshToken = new RefreshTokenEntity();
         refreshToken.setUserEntity(userEntity);
         refreshToken.setRefreshToken(UUID.randomUUID().toString());
         refreshToken.setExpiresAt(LocalDateTime.now().plusDays(7));
+
+        refreshToken.setUserAgent(userAgent);
+        refreshToken.setIpAddress(ipAddress);
+        refreshToken.setIsActive(true);
+        refreshToken.setCreatedAt(LocalDateTime.now());
+        refreshToken.setDeviceId(deviceId);
         return refreshTokenRepository.save(refreshToken);
     }
 
@@ -36,7 +49,26 @@ public class RefreshTokenService {
 
     //During delete JPA says I can't delete without transaction so, that's why used (@Transactional) Annotation.
     @Transactional
-    public void deleteByUser(UserEntity userEntity) {
-        refreshTokenRepository.deleteByUserEntity(userEntity);
+    public void logoutUser(String token) {
+        RefreshTokenEntity session = refreshTokenRepository
+                .findByToken(token)
+                .orElseThrow();
+
+        session.setIsActive(false);
+        refreshTokenRepository.save(session);
+    }
+
+    @Transactional
+    public void logoutAllDevice(String token){
+        RefreshTokenEntity user = refreshTokenRepository
+                .findByToken(token)
+                .orElseThrow();
+        var sessions =
+                refreshTokenRepository.findByDeviceIdAndIsActiveTrue(user.getDeviceId());
+
+        for (RefreshTokenEntity session : sessions) {
+            session.setIsActive(false);
+        }
+        refreshTokenRepository.saveAll(sessions);
     }
 }

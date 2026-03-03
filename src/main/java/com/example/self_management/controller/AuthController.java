@@ -5,6 +5,7 @@ import com.example.self_management.model.dto.auth.JwtResponse;
 import com.example.self_management.model.dto.auth.LoginRequest;
 import com.example.self_management.model.dto.auth.RefreshTokenRequest;
 import com.example.self_management.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+        return ResponseEntity.ok(authService.login(request, httpRequest));
     }
 
     @PostMapping("/refresh")
@@ -39,5 +40,11 @@ public class AuthController {
     public ResponseEntity<?> logout(@RequestBody RefreshTokenRequest request) {
         authService.logout(request.getRefreshToken());
         return ResponseEntity.ok("Logged out");
+    }
+
+    @PostMapping("/logout-all")
+    public ResponseEntity<?> logoutFromAllDevices(@RequestBody RefreshTokenRequest request) {
+        authService.logoutAll(request.getRefreshToken());
+        return ResponseEntity.ok("Logged out from all devices");
     }
 }
