@@ -6,7 +6,10 @@ import com.example.self_management.model.dto.auth.JwtResponse;
 import com.example.self_management.model.dto.auth.LoginRequest;
 import com.example.self_management.persistence.entity.RefreshTokenEntity;
 import com.example.self_management.persistence.entity.UserEntity;
+import com.example.self_management.persistence.repository.RefreshTokenRepository;
 import com.example.self_management.persistence.repository.UserRepository;
+import com.example.self_management.utils.RequestUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,9 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RefreshTokenRepository refreshTokenRepository;
+
     public void register(User requestUser) {
         UserEntity user = new UserEntity();
         boolean exist = userRepository.findByUsername(requestUser.getUsername()).isPresent();
@@ -41,13 +47,20 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public JwtResponse login(LoginRequest loginRequest) {
+    public JwtResponse login(LoginRequest loginRequest,  HttpServletRequest httpRequest) {
+
         UserEntity user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
+
+        // 4️⃣ Capture device info
+        String userAgent = httpRequest.getHeader("User-Agent");
+        String ipAddress = RequestUtils.getClientIp(httpRequest);
+
+        // 3️⃣ Generate tokens
         String accessToken = jwtService.generateAccessToken(user.getId());
-        RefreshTokenEntity refreshTokenEntity = refreshTokenService.createRefreshToken(user);
+        RefreshTokenEntity refreshTokenEntity = refreshTokenService.createRefreshToken(user, userAgent, ipAddress, loginRequest.getDeviceId());
         return new JwtResponse(accessToken, refreshTokenEntity.getRefreshToken());
     }
 
@@ -58,8 +71,11 @@ public class AuthService {
     }
 
     public void logout(String refreshToken) {
-        RefreshTokenEntity token = refreshTokenService.verifyRefreshToken(refreshToken);
-        refreshTokenService.deleteByUser(token.getUserEntity());
+        refreshTokenService.logoutUser(refreshToken);
+    }
+
+    public void logoutAll(String refreshToken) {
+        refreshTokenService.logoutAllDevice(refreshToken);
     }
 
 

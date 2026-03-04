@@ -4,11 +4,15 @@ public class LoginRequest {
     private String username;
     private String password;
 
+    //Added for device tracking
+    private String deviceId;
+
     public LoginRequest(){}
 
-    public LoginRequest(String username, String password){
+    public LoginRequest(String username, String password, String deviceId) {
         this.password = password;
         this.username = username;
+        this.deviceId = deviceId;
     }
 
     public String getUsername(){
@@ -25,5 +29,12 @@ public class LoginRequest {
 
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public String getDeviceId(){
+        return deviceId;
+    }
+    public void setDeviceId(String deviceId){
+        this.deviceId = deviceId;
     }
 }
