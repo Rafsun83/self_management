@@ -1,30 +1,40 @@
 package com.example.self_management.persistence.entity;
 
+import com.example.self_management.enums.wallets.WalletType;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="wallet" )
+@Table(name="wallet")
 public class WalletEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
-    private String type;
-    private Number amount;
+
+    @Enumerated(EnumType.STRING)
+    private WalletType type;
+    private Number totalAmount;
     private String category;
-    private Date createdTime;
-    private Date updatedTime;
+    private Date createdAt;
+    private Date updatedAt;
+
+    private String note;
+    private String walletName;
+
 
     public WalletEntity() {}
 
-    public WalletEntity(Long id, String type, Number amount, String category, Long userId) {
+    public WalletEntity(Long id, WalletType type, Number totalAmount, String category, Long userId, String note, String walletName) {
         this.id = id;
         this.type = type;
-        this.amount = amount;
+        this.totalAmount = totalAmount;
         this.category = category;
         this.userId = userId;
+        this.note = note;
+        this.walletName = walletName;
     }
 
     public Long getId(){
@@ -33,17 +43,17 @@ public class WalletEntity {
     public void setId(Long id){
         this.id = id;
     }
-    public String getType(){
+    public WalletType getType(){
         return type;
     }
-    public void setType(String type){
+    public void setType(WalletType type){
         this.type = type;
     }
-    public Number getAmount(){
-        return amount;
+    public Number getTotalAmount(){
+        return totalAmount;
     }
-    public void setAmount(Number amount){
-        this.amount = amount;
+    public void setTotalAmount(Number totalAmount){
+        this.totalAmount = totalAmount;
     }
     public String getCategory(){
         return category;
@@ -51,17 +61,17 @@ public class WalletEntity {
     public void setCategory(String category){
         this.category = category;
     }
-    public Date getCreatedTime(){
-        return createdTime;
+    public Date getCreatedAt(){
+        return createdAt;
     }
-    public void setCreatedTime(Date createdTime){
-        this.createdTime = createdTime;
+    public void setCreatedAt(Date createdAt){
+        this.createdAt = createdAt;
     }
-    public Date getUpdatedTime(){
-        return updatedTime;
+    public Date getUpdatedAt(){
+        return updatedAt;
     }
-    public void setUpdatedTime(Date updatedTime){
-        this.updatedTime = updatedTime;
+    public void setUpdatedAt(Date updatedAt){
+        this.updatedAt = updatedAt;
     }
 
     public Long getUserId(){
@@ -69,5 +79,18 @@ public class WalletEntity {
     }
     public void setUserId(Long userId){
         this.userId = userId;
+    }
+
+    public String getNote(){
+        return note;
+    }
+    public void setNote(String note){
+        this.note = note;
+    }
+    public String getWalletName(){
+        return walletName;
+    }
+    public void setWalletName(String walletName){
+        this.walletName = walletName;
     }
 }

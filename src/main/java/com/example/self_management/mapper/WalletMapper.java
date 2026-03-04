@@ -21,18 +21,17 @@ public class WalletMapper {
 
     public WalletEntity createWalletRequestToEntity(CreateWalletRequest createWalletRequest, Long userId) {
         WalletEntity walletEntity = new WalletEntity();
-        walletEntity.setCreatedTime(new Date());
+        walletEntity.setCreatedAt(new Date());
         walletEntity.setUserId(userId);
         BeanUtils.copyProperties(createWalletRequest,walletEntity);
         return walletEntity;
     }
 
     public WalletEntity updateWalletRequestToEntity(UpdateWalletRequest updateWalletRequest, WalletEntity walletEntity) {
-        walletEntity.setAmount(updateWalletRequest.amount());
+        walletEntity.setTotalAmount(updateWalletRequest.totalAmount());
         walletEntity.setCategory(updateWalletRequest.category());
         walletEntity.setType(updateWalletRequest.type());
-        walletEntity.setUpdatedTime(new Date());
+        walletEntity.setUpdatedAt(new Date());
         return walletEntity;
-
     }
 }
