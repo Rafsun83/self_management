@@ -2,6 +2,7 @@ package com.example.self_management.model.domain;
 
 import com.example.self_management.enums.wallets.WalletType;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -9,7 +10,7 @@ public class Wallet {
     private Long id;
     private Long userId;
     private WalletType type;
-    private Number totalAmount;
+    private BigDecimal totalAmount;
     private String category;
     private Date createdAt;
     private Date updatedAt;
@@ -20,7 +21,7 @@ public class Wallet {
 
     public Wallet() {}
 
-    public Wallet(Long id, WalletType type, Number totalAmount, String category, Long userId, String note, String walletName) {
+    public Wallet(Long id, WalletType type, BigDecimal totalAmount, String category, Long userId, String note, String walletName) {
         this.id = id;
         this.type = type;
         this.totalAmount = totalAmount;
@@ -42,10 +43,10 @@ public class Wallet {
     public void setType(WalletType type){
         this.type = type;
     }
-    public Number getTotalAmount(){
+    public BigDecimal getTotalAmount(){
         return totalAmount;
     }
-    public void setTotalAmount(Number totalAmount){
+    public void setTotalAmount(BigDecimal totalAmount){
         this.totalAmount = totalAmount;
     }
     public String getCategory(){

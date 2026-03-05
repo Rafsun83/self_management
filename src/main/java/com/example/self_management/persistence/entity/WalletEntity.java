@@ -3,6 +3,7 @@ package com.example.self_management.persistence.entity;
 import com.example.self_management.enums.wallets.WalletType;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class WalletEntity {
 
     @Enumerated(EnumType.STRING)
     private WalletType type;
-    private Number totalAmount;
+    private BigDecimal totalAmount;
     private String category;
     private Date createdAt;
     private Date updatedAt;
@@ -27,7 +28,7 @@ public class WalletEntity {
 
     public WalletEntity() {}
 
-    public WalletEntity(Long id, WalletType type, Number totalAmount, String category, Long userId, String note, String walletName) {
+    public WalletEntity(Long id, WalletType type, BigDecimal totalAmount, String category, Long userId, String note, String walletName) {
         this.id = id;
         this.type = type;
         this.totalAmount = totalAmount;
@@ -49,10 +50,10 @@ public class WalletEntity {
     public void setType(WalletType type){
         this.type = type;
     }
-    public Number getTotalAmount(){
+    public BigDecimal getTotalAmount(){
         return totalAmount;
     }
-    public void setTotalAmount(Number totalAmount){
+    public void setTotalAmount(BigDecimal totalAmount){
         this.totalAmount = totalAmount;
     }
     public String getCategory(){
