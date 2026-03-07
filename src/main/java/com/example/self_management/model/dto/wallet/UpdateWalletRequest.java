@@ -1,4 +1,8 @@
 package com.example.self_management.model.dto.wallet;
 
-public record UpdateWalletRequest(Number amount, String category, String type) {
+import com.example.self_management.enums.wallets.WalletType;
+
+import java.math.BigDecimal;
+
+public record UpdateWalletRequest(WalletType type, BigDecimal totalAmount, String category, String walletName, String note) {
 }
